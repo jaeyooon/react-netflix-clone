@@ -15,7 +15,7 @@ export default function Row({ title, fetchUrl, isLargeRow, id }) {
 
   const fetchMovieData = async () => {    // 비동기 요청
     const request = await axios.get(fetchUrl);
-    console.log('request', request);
+    //console.log('request', request);
     setMovies(request.data.results);    // 영화 정보들을 movies state에 넣어줌.
   }
 
