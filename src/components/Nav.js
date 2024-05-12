@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import "./Nav.css"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Nav() {
 
   const [show, setShow] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
+
+  const location = useLocation()
 
   useEffect(() => {
     window.addEventListener("scroll", () => {   // 스크롤할 때 함수 호출
@@ -25,9 +27,15 @@ export default function Nav() {
 
   const handleChange = (e) => {
     setSearchValue(e.target.value);
-    navigate(`/search?q=${e.target.value}`)
+    navigate(`/search?q=${e.target.value}`);
   }
 
+  useEffect(() => {
+    const splittedPathname = location?.pathname?.split('/')[1]
+    if (!isNaN(splittedPathname)) {
+      setSearchValue('')    // 검색어 입력 후 해당 영화의 상세페이지로 갔을 때 검색창이 초기화되도록 하기 위해
+    }
+  }, [location.pathname])
 
   return (
     <nav className={`nav ${show && "nav__black"}`}>
@@ -35,7 +43,10 @@ export default function Nav() {
         alt='Netflix logo'
         src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/200px-Netflix_2015_logo.svg.png'
         className='nav__logo'
-        onClick={() => window.location.reload()}  // 넷플릭스 로고를 클릭했을때 페이지 리로드하도록
+        onClick={() => {
+          navigate('/')
+          setSearchValue("")
+        }}  // 넷플릭스 로고를 클릭했을때 메인페이지로 돌아오도록
       />
 
       <input
