@@ -34,13 +34,13 @@ function MovieModal({
 
           <div className='modal__content'>
             <p className='modal__details'>
-              <span className='modal__user_perc'>
-                100% for you{" "}
+              <span style={{ color: '#46d369' }}>
+                {Math.floor(Math.random() * (101))}% for you{" "}
               </span>
               {release_date ? release_date : first_air_date}
             </p>
             <h2 className='modal__title'>{title ? title : name}</h2>
-            <p className='modal__overview'> 평점: {vote_average.toFixed(2)}</p>
+            <p className='modal__vote_average'> ✔ 평점: {Math.round(vote_average * 10) / 10}</p>
             <p className='modal__overview'> {overview}</p>
           </div>
 

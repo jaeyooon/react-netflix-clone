@@ -5,6 +5,7 @@ import Nav from './components/Nav';
 import MainPage from './pages/MainPage';
 import DetailPage from './pages/DetailPage';
 import SearchPage from './pages/SearchPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 
 const Layout = () => {
@@ -27,6 +28,7 @@ function App() {
           <Route index element={<MainPage />} />
           <Route path=':movieId' element={<DetailPage />} />
           <Route path='search' element={<SearchPage />} />
+          <Route path='/*' element={<NotFoundPage />} />
         </Route>
       </Routes>
     </div>

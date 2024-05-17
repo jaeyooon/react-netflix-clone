@@ -36,8 +36,8 @@
   line-height: 1.5;
 }
 
-.modal__user-perc {
-  color: #46d369;
+.modal__vote_average {
+  font-size: 20px;
 }
 
 .modal::-webkit-scrollbar {
