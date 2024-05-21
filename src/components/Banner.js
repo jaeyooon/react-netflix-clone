@@ -3,10 +3,12 @@ import React, { useEffect, useState } from 'react'
 import requests from '../api/requests';
 import "./Banner.css"
 import styled from 'styled-components';
+import MovieModal from './MovieModal';
 
 export default function Banner() {
   const [movie, setMovie] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -34,6 +36,11 @@ export default function Banner() {
     return str?.length > n ? str.substr(0, n - 1) + "..." : str
   }
 
+  const handleClick = (movie) => {
+    console.log('moreInfo', movie);
+    setModalOpen(true);
+  }
+
   if (!isClicked) {
     return (
       <header
@@ -53,8 +60,17 @@ export default function Banner() {
             >
               Play
             </button>
-            <button className='banner__button info'>More Information</button>
+            <button
+              className='banner__button info'
+              onClick={() => handleClick(movie)}>
+              More Information
+            </button>
           </div>
+          {
+            modalOpen && (
+              <MovieModal {...movie} setModalOpen={setModalOpen} />
+            )
+          }
           <h1 className='banner__description'>{truncate(movie.overview, 100)}</h1>
         </div>
         <div className='banner--fadeBottom'></div>
